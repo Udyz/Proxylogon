@@ -5,10 +5,8 @@ https://beta.shodan.io/search?query=http.component%3A%22outlook+web+app%22
 <br>https://beta.shodan.io/search?query=http.html%3A%22%2Fowa%22
 <img src="https://i.imgur.com/yP2L4EA.png"/>
 <h1>Fofa</h1>
-<code>
 <br>https://fofa.so/result?q=title%3D%22Outlook+Web+App%22
 <br>https://fofa.so/result?q=%22%2Fowa%22&qbase64=Ii9vd2Ei
-</code>
 <img src="https://i.imgur.com/Y5y1G2k.png"/>
 <h1>Zoomeye</h1>
 <br>https://www.zoomeye.org/searchResult?q=%2Fowa
