@@ -2,6 +2,8 @@
 CVE-2021-26855 SSRF Exchange Server
 <h1>Timeline:</h1>
 <p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
+<p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
+<img src="https://i.imgur.com/098HKFd.png"/>
 <h1>Shodan</h1><br>
 https://beta.shodan.io/search?query=http.component%3A%22outlook+web+app%22
 <br>https://beta.shodan.io/search?query=http.html%3A%22%2Fowa%22
