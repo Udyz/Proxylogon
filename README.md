@@ -1,5 +1,5 @@
-# CVE-2021-26855-SSRF-Exchange
-CVE-2021-26855 SSRF Exchange Server
+# CVE-2021-26855 Simple Check Valid mail
+CVE-2021-26855
 <h1>Timeline:</h1>
 <p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
