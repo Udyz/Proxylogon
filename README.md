@@ -3,9 +3,10 @@ CVE-2021-26855
 <h1>Timeline:</h1>
 <p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
-<img src="https://i.imgur.com/098HKFd.png"/>
-<code>intext:'@domain.ltd'</code>
+<p>Wednesday, March 10, 2021: Maybe im done this script, now im waiting true cve pre-auth rce</p>
+<img src="https://i.imgur.com/qqmEKja.png"/>
 <pre>Sometime, some server extract domain tld is wrong</pre>
+<pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
 <h1>Shodan</h1><br>
 https://beta.shodan.io/search?query=http.component%3A%22outlook+web+app%22
 <br>https://beta.shodan.io/search?query=http.html%3A%22%2Fowa%22
