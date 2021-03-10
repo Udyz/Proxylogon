@@ -5,6 +5,7 @@ CVE-2021-26855
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
 <img src="https://i.imgur.com/098HKFd.png"/>
 <code>intext:'@domain.ltd'</code>
+<pre>Sometime, some server extract domain tld is wrong</pre>
 <h1>Shodan</h1><br>
 https://beta.shodan.io/search?query=http.component%3A%22outlook+web+app%22
 <br>https://beta.shodan.io/search?query=http.html%3A%22%2Fowa%22
