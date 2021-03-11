@@ -1,5 +1,7 @@
-# CVE-2021-26855 Brute Force EMail Exchange Server
-for education and research
+# CVE-2021-26855 Brute Force Email Exchange Server
+For Education and Research
+## Tested on:
+### Windows - Python 3 /Linux - Python 3
 <h1>Timeline:</h1>
 <p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
@@ -9,3 +11,12 @@ for education and research
 <pre>Sometime, some server extract domain tld is wrong</pre>
 <pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
 <br>Sorry my bad english
+<h1>Reference</h1>
+- https://gist.github.com/testanull/324546bffab2fe4916d0f9d1f03ffa09
+- https://raw.githubusercontent.com/microsoft/CSS-Exchange/main/Security/http-vuln-cve2021-26855.nse
+- https://github.com/projectdiscovery/nuclei-templates/blob/master/cves/2021/CVE-2021-26855.yaml
+- https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/
+- https://proxylogon.com
+- https://testbnull.medium.com/ph%C3%A2n-t%C3%ADch-l%E1%BB%97-h%E1%BB%95ng-proxylogon-mail-exchange-rce-s%E1%BB%B1-k%E1%BA%BFt-h%E1%BB%A3p-ho%C3%A0n-h%E1%BA%A3o-cve-2021-26855-37f4b6e06265
+<br><pre>GET rickrolled brrr</pre>
+<img src="https://i.imgur.com/WsUV4DK.gif"/>
