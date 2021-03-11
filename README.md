@@ -3,7 +3,8 @@
 <p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
 <p>Wednesday, March 10, 2021: Maybe im done this script, now im waiting true cve pre-auth rce</p>
-<img src="https://i.imgur.com/qqmEKja.png"/>
+<p>Thursday, March 11, 2021: Proxylogon Coming Soon!!!</p>
+<img src="https://i.imgur.com/EyxgGgd.png"/>
 <pre>Sometime, some server extract domain tld is wrong</pre>
 <pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
 <h1>Shodan</h1><br>
