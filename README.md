@@ -7,7 +7,8 @@ For Education and Research
 <p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
 <p>Wednesday, March 10, 2021: Maybe im done this script, now im waiting true cve pre-auth rce</p>
 <p>Thursday, March 11, 2021: Proxylogon never Coming Soon..</p>
-<img src="https://i.imgur.com/EyxgGgd.png"/>
+<p>Friday, March 12, 2021: All PoC Exploit Proxylogon release in github will be banned!</p>
+<img src="https://i.imgur.com/fCk746q.png"/>
 <pre>Sometime, some server extract domain tld is wrong</pre>
 <pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
 <br>Sorry my bad english
