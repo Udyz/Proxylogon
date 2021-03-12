@@ -2,12 +2,7 @@
 For Education and Research
 ## Tested on:
 ### Windows - Python 3 /Linux - Python 3
-<h1>Timeline:</h1>
-<p>Monday, March 8, 2021: Update Dumping content...(I'm not done, can u guy help me done this code ;-;)</p>
-<p>Tuesday, March 9, 2021: Remake to simple check valid mail</p>
-<p>Wednesday, March 10, 2021: Maybe im done this script, now im waiting true cve pre-auth rce</p>
-<p>Thursday, March 11, 2021: Proxylogon Coming Soon..</p>
-<p>Friday, March 12, 2021: If you are not script kiddies, you will know how to run proxylogon</p>
+<p>If you are not script kiddies, you will know how to run proxylogon</p>
 <img src="https://i.imgur.com/fCk746q.png"/>
 <pre>Sometime, some server extract domain tld is wrong</pre>
 <pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
