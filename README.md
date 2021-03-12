@@ -1,5 +1,4 @@
-# CVE-2021-26855 Brute Force Email Exchange Server
-# Proxylogon Exploit for skidz or pentest
+# ProxyLogon Pre-Auth SSRF To Arbitrary File Write
 For Education and Research
 ## Tested on:
 ### Windows - Python 3 /Linux - Python 3
