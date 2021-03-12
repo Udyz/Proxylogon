@@ -3,6 +3,9 @@ from urllib3.exceptions import InsecureRequestWarning
 import random
 import string
 import sys
+import os
+import time
+import webbrowser
 #write by jang aka tesanull
 
 def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
