@@ -6,6 +6,8 @@ For Education and Research
 <pre>Sometime, some server extract domain tld is wrong</pre>
 <pre>Download users.txt list from github or u find it with Google Dork: <code>intext:'@domain.ltd'</code></pre>
 <br>Sorry my bad english
+<br>[+] Better version scan valid mail code by Gonzalo Villegas<br>
+https://gitlab.com/gvillegas/ohwaa/-/blob/master/owamails.py
 <h1>Reference:</h1>
 <br>https://gist.github.com/testanull/324546bffab2fe4916d0f9d1f03ffa09
 <br>https://raw.githubusercontent.com/microsoft/CSS-Exchange/main/Security/http-vuln-cve2021-26855.nse
