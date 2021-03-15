@@ -116,8 +116,6 @@ ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Wrong canary!")
     print("Sometime we can skip this ...")
-rbacRole = ct.text.split("RBAC roles:</span> <span class='diagTxt'>")[1].split("</span>")[0]
-#print "Got rbacRole: "+ rbacRole
 
 print("=========== It means good to go!!!====")
 
