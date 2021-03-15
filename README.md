@@ -17,3 +17,5 @@ Successful!
 CMD: whoami
 nt authority\system
 ```
+# Want this? (it made from script kiddies)
+![image](https://user-images.githubusercontent.com/39673284/111138618-b9a1e580-85b2-11eb-93df-14c5449798a4.png)
