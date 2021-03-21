@@ -139,7 +139,7 @@ ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
                                       "SelectedView": "", "SelectedVDirType": "All"}}, "sort": {}},
                    verify=False
                    )
-if ct.status_code != 200:
+if ct.status_code != 200 or "RawIdentity" not in ct.text:
     print("GetOAB Error!")
     exit()
 oabId = ct.text.split('"RawIdentity":"')[1].split('"')[0]
