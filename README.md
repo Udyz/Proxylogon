@@ -18,7 +18,7 @@ CMD: whoami
 nt authority\system
 ```
 #### Automatic Exploit: [https://github.com/Udyz/Automatic-Proxylogon-Exploit](https://github.com/Udyz/Automatic-Proxylogon-Exploit)
-#### Dump Email and View Content: [https://gitlab.com/gvillegas/ohwaa/](https://gitlab.com/gvillegas/ohwaa/)
+#### View content and download: [https://gitlab.com/gvillegas/ohwaa/](https://gitlab.com/gvillegas/ohwaa/)
 
 # Want this? (it made from script kiddies)
 ```
